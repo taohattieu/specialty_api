@@ -1,4 +1,14 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { SpecialtyService } from './specialty.service';
 
 @Controller('specialty')
-export class SpecialtyController {}
+@ApiTags('Specialty')
+export class SpecialtyController {
+    constructor(private readonly specialtyService: SpecialtyService) {}
+
+    @Get()
+    GetAll(): string{
+        return 'Specialty'
+    }
+}

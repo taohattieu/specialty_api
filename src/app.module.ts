@@ -18,6 +18,8 @@ import { RegionsModule } from './regions/regions.module';
 import { Regions } from './regions/regions.entities';
 import { FavoritesModule } from './favorites/favorites.module';
 import { Favorites } from './favorites/favorites.entities';
+import { SpecialtyDetailsModule } from './specialty-details/specialty-details.module';
+import { AccountModule } from './user/account/account.module';
 
 @Module({
   imports: [
@@ -46,11 +48,13 @@ import { Favorites } from './favorites/favorites.entities';
     }),
     ProvinceModule,
     SpecialtyModule,
+    SpecialtyDetailsModule,
     NotificationModule,
     AuthModule,
     ProfileModule,
     RegionsModule,
     FavoritesModule,
+    AccountModule
   ],
   controllers: [AppController],
   providers: [AppService],
