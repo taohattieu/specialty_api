@@ -8,9 +8,16 @@ export class ProvinceDto {
 
     @IsString()
     @IsNotEmpty()
+    @ApiProperty({ example: ""})
     name: string
 
+    @ApiProperty({ example: ""})
     image: string
 
+    @ApiProperty({ example: ""})
     description: string
+
+    @IsNotEmpty()
+    @ApiProperty({ example: ""})
+    regions_id: string
 }

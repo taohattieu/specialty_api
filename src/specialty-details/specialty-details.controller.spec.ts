@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SpecialtyDetailsController } from './specialty-details.controller';
 
+
 describe('SpecialtyController', () => {
   let controller: SpecialtyDetailsController;
 

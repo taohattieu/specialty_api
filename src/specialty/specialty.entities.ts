@@ -1,3 +1,4 @@
+
 import { Favorites } from 'src/favorites/favorites.entities';
 import { Province } from 'src/province/province.entities';
 import { SpecialtyDetails } from 'src/specialty-details/specialty-details.entities';

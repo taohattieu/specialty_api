@@ -24,5 +24,8 @@ export class Province {
   @JoinColumn({ name: 'regions_id' })
   regions: Regions;
 
+  @Column()
+  regions_id: string
+
 
 }
