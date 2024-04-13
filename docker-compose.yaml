@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  # MySQL
+  database:
+    container_name: specialty
+    image: mysql:8
+    command: --default-authentication-plugin=caching_sha2_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_HOST=0.0.0.0
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_ROOT_PASSWORD=12345678
+      - MYSQL_DATABASE=specialty_database
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - 3306:3306
+    volumes:
+      - specialty-volume:/var/lib/mysql
+    networks:
+      - specialty-network
+
+networks:
+  specialty-network:
+    driver: bridge
+
+volumes:
+  specialty-volume:
