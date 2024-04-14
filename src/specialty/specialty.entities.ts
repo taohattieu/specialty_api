@@ -15,6 +15,9 @@ export class Specialty {
   @Column()
   image: string;
 
+  @Column()
+  province_id: string
+
   @ManyToOne(() => Province, province => province.specialty)
   @JoinColumn({ name: 'province_id' })
   province: Province;
@@ -22,7 +25,6 @@ export class Specialty {
   @OneToMany(() => SpecialtyDetails, specialtydetails => specialtydetails.Specialty)
   specialtydetails: SpecialtyDetails[];
 
-  @OneToOne(() => Favorites, favorites => favorites.account)
-  @JoinColumn({ name: 'specialty_id'})
+  @OneToOne(() => Favorites, favorites => favorites.specialty)
   favorites: Favorites;
 }
