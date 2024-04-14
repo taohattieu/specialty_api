@@ -1,8 +1,8 @@
 import { Optional } from '@nestjs/common'
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator'
+import { IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator'
 
-export class ProvinceDto {
+export class ProvinceAddDto {
 
     province_id: string
 
@@ -11,9 +11,11 @@ export class ProvinceDto {
     @ApiProperty({ example: ""})
     name: string
 
+    @IsOptional()
     @ApiProperty({ example: ""})
     image: string
 
+    @IsOptional()
     @ApiProperty({ example: ""})
     description: string
 

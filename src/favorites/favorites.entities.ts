@@ -12,5 +12,6 @@ export class Favorites {
   account: AccountEntity;
 
   @OneToOne(() => Specialty, (specialty) => specialty.favorites)
+  @JoinColumn({ name: 'specialty_id'})
   specialty: Specialty;
 }
