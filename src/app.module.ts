@@ -20,6 +20,7 @@ import { FavoritesModule } from './favorites/favorites.module';
 import { Favorites } from './favorites/favorites.entities';
 import { SpecialtyDetailsModule } from './specialty-details/specialty-details.module';
 import { AccountModule } from './user/account/account.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -54,7 +55,8 @@ import { AccountModule } from './user/account/account.module';
     ProfileModule,
     RegionsModule,
     FavoritesModule,
-    AccountModule
+    AccountModule,
+    JwtModule
   ],
   controllers: [AppController],
   providers: [AppService],

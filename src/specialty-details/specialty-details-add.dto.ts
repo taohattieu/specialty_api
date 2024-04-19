@@ -2,7 +2,7 @@ import { Optional } from "@nestjs/common"
 import { IsNotEmpty } from "class-validator"
 
 
-export class SpecialtyDetailsDto {
+export class SpecialtyDetailsAddDto {
 
     specialtydetails_id
 
