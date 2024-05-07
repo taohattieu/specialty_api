@@ -1,22 +1,26 @@
 
+import { BasedEntity } from 'src/common/based.entity';
 import { Favorites } from 'src/favorites/favorites.entities';
 import { NotificationEntity } from 'src/notification/notification.entities';
 import { ProfileEntity } from 'src/user/profile/entities/profile.entities';
 import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('account')
-export class AccountEntity {
+export class AccountEntity extends BasedEntity {
 
   @PrimaryGeneratedColumn('uuid')
-  account_id: string
+  account_id: string;
 
   @Column()
   username: string;
 
   @Column()
-  password: string
+  password: string;
 
-  @OneToOne(() => ProfileEntity, (profile) => profile.account)
+  @Column({ nullable: true, type: 'longtext' })
+  refreshToken?: string;
+
+  @OneToOne(() => ProfileEntity, ({ account }) => account)
   profile: ProfileEntity;
 
   @OneToMany(() => NotificationEntity, notification => notification.account)

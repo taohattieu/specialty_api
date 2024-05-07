@@ -1,20 +1,21 @@
+import { BasedEntity } from 'src/common/based.entity';
 import { AccountEntity } from 'src/user/account/entities/account.entities';
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('profile')
-export class ProfileEntity {
+export class ProfileEntity extends BasedEntity {
 
   @PrimaryGeneratedColumn('uuid')
   profile_id: string
 
   @Column()
-  fullName: string;
+  displayName: string;
 
   @Column()
-  avatar: string;
+  avatar?: string;
 
-  @OneToOne(() => AccountEntity, account => account.profile)
-  @JoinColumn({ name: 'account_id' })
+  @OneToOne(() => AccountEntity, ({ profile }) => profile)
+  @JoinColumn({ name: 'account_id'})
   account: AccountEntity;
   
 }

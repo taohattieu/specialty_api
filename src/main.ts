@@ -53,7 +53,12 @@ const httpAdapter = app.getHttpAdapter();
     
     
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, {
+    swaggerOptions: {
+      // Lưu lại authorization data và sẽ không bị mất khi refresh lại trang
+      persistAuthorization: true,
+    },
+  });
   await app.listen(8080);
   console.info(`Server is running on 8080`);
   console.info(`OpenAPI: http://localhost:8080/api`);
