@@ -21,9 +21,14 @@ import { Favorites } from './favorites/favorites.entities';
 import { SpecialtyDetailsModule } from './specialty-details/specialty-details.module';
 import { AccountModule } from './user/account/account.module';
 import { JwtModule } from '@nestjs/jwt';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 1000 * 60, // 1 day
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
