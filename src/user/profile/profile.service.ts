@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateProfileDto } from './dto/profile-update.dto';
 import { ProfileRepository } from './profile.repository';
@@ -12,6 +12,18 @@ export class ProfileService {
     @InjectRepository(ProfileRepository)
     private readonly _profileRepository: ProfileRepository,
   ) {}
+
+// // Hiển thị profile theo id
+// async findProfileById(profile_id: string): Promise<ProfileDto> {
+//   const profile = await this._profileRepository.findOne({
+//     where: { profile_id },
+//   });
+//   // console.log("Profile:", profile);
+//   if (!profile) {
+//     throw new NotFoundException(`Profile ${profile_id} not found`);
+//   }
+//   return new ProfileDto(profile);
+// }
 
   async update(authUser: JwtClaimDto, updateProfileDto: UpdateProfileDto) {
     try {
@@ -52,4 +64,7 @@ export class ProfileService {
       throw error;
     }
   }
+
+
+
 }

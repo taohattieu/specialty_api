@@ -1,6 +1,6 @@
 
 import { BasedEntity } from 'src/common/based.entity';
-import { Favorites } from 'src/favorites/favorites.entities';
+import { FavoritesEntity } from 'src/favorites/favorites.entities';
 import { NotificationEntity } from 'src/notification/notification.entities';
 import { ProfileEntity } from 'src/user/profile/entities/profile.entities';
 import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
@@ -26,6 +26,6 @@ export class AccountEntity extends BasedEntity {
   @OneToMany(() => NotificationEntity, notification => notification.account)
   notification: NotificationEntity[];
 
-  @OneToMany(() => Favorites, favorites => favorites.account)
-  favorites: Favorites[];
+  @OneToMany(() => FavoritesEntity, favorites => favorites.account)
+  favorites: FavoritesEntity[];
 }

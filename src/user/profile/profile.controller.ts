@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, UseGuards } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiOkResponse,
@@ -12,11 +12,19 @@ import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { ProfileService } from './profile.service';
 import { AuthUser } from 'src/decorators/auth-user.decorator';
 import { JwtClaimDto } from 'src/common/jwt-claim.dto';
+import { ProfileEntity } from './entities/profile.entities';
+import { profile } from 'console';
 
 @Controller({ path: 'profile', version: apiVersion })
 @ApiTags('Profile')
 export class ProfileController {
   constructor(private readonly _profileService: ProfileService) {}
+
+
+  // @Get(':id')
+  // async getProfileById(@Param('id') profile_id: string): Promise<ProfileDto> {
+  //   return this._profileService.findProfileById(profile_id);
+  // }
 
   @Get('me')
   @ApiBearerAuth()

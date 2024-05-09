@@ -210,18 +210,24 @@ async restoreData(id: string) {
 }
 
 
-async logout(authUser: JwtClaimDto) {
+async logout(authUser: JwtClaimDto): Promise<string> {
   try {
-    // Xóa thông tin đăng nhập liên quan đến người dùng hiện tại
-    await this._accountRepository.update(
-      { account_id: authUser.account_id }, 
-      { refreshToken: null },
-    );
-    return 'Logout successfully';
+    // Tìm và cập nhật thông tin tài khoản để đánh dấu là đã đăng xuất
+    const updatedAccount = await this._accountRepository.findOne({
+      where: { account_id: authUser.account_id }
+    });
+    if (!updatedAccount) {
+      throw new NotFoundException(`Account ${authUser.account_id} not found`);
+    }
+    updatedAccount.refreshToken = null; // Đánh dấu refreshToken của tài khoản thành null để đăng xuất
+    await this._accountRepository.save(updatedAccount); // Lưu thay đổi vào cơ sở dữ liệu
+
+    return `Logout successfully ${authUser.account_id}`;
   } catch (error) {
     throw error;
   }
 }
+
 
   // Lấy refreshToken
   async refreshToken(refreshTokenRequestDto: RefreshTokenRequestDto) {

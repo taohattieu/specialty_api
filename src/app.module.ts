@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ProvinceModule } from './province/province.module';
 import { SpecialtyModule } from './specialty/specialty.module';
 import { NotificationModule } from './notification/notification.module';
@@ -17,7 +15,7 @@ import { SpecialtyDetails } from './specialty-details/specialty-details.entities
 import { RegionsModule } from './regions/regions.module';
 import { Regions } from './regions/regions.entities';
 import { FavoritesModule } from './favorites/favorites.module';
-import { Favorites } from './favorites/favorites.entities';
+import { FavoritesEntity } from './favorites/favorites.entities';
 import { SpecialtyDetailsModule } from './specialty-details/specialty-details.module';
 import { AccountModule } from './user/account/account.module';
 import { JwtModule } from '@nestjs/jwt';
@@ -47,7 +45,7 @@ import { CacheModule } from '@nestjs/cache-manager';
         NotificationEntity,
         AccountEntity,
         ProfileEntity,
-        Favorites
+        FavoritesEntity
       ],
       synchronize: true,
       // logging: true
@@ -63,7 +61,5 @@ import { CacheModule } from '@nestjs/cache-manager';
     AccountModule,
     JwtModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
