@@ -113,6 +113,7 @@ export class AuthService {
       await this._profileRepository.save({
         displayName: `${registerRequestDto.firstName} ${registerRequestDto.lastName}`,
         avatar: `${registerRequestDto.avatar}`,
+        address: `${registerRequestDto.address}`,
         account: { account_id: accountCreatedWithoutRefreshToken.account_id },
       });
   

@@ -13,11 +13,15 @@ export class ProfileDto extends BasedDto {
   @ApiProperty()
   avatar?: string;
 
+  @ApiProperty()
+  address?: string;
+
   constructor(user: ProfileEntity) {
     super(user);
     // this.profile_id = user.profile_id;
     this.displayName = user.displayName;
     this.avatar = user.avatar;
+    this.address = user.address;
     this.createdAt = user.createdAt;
     this.updatedAt = user.updatedAt;
   }

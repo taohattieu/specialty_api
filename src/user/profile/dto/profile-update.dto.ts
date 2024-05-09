@@ -12,4 +12,9 @@ export class UpdateProfileDto {
   @IsOptional()
   avatar?: string;
 
+  @ApiPropertyOptional()
+  @IsString()
+  @IsOptional()
+  address?: string;
+
 }
