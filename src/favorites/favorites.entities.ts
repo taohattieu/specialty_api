@@ -3,12 +3,12 @@ import { AccountEntity } from "src/user/account/entities/account.entities";
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('favorites')
-export class Favorites {
+export class FavoritesEntity {
     @PrimaryGeneratedColumn('uuid')
     favorites_id: string
 
     @CreateDateColumn()
-    createAt: string;
+    createdAt: string;
 
   @ManyToOne(() => AccountEntity, account => account.favorites)
   @JoinColumn({ name: 'account_id' })

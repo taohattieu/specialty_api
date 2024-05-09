@@ -1,5 +1,5 @@
 
-import { Favorites } from 'src/favorites/favorites.entities';
+import { FavoritesEntity } from 'src/favorites/favorites.entities';
 import { Province } from 'src/province/province.entities';
 import { SpecialtyDetails } from 'src/specialty-details/specialty-details.entities';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany, OneToOne } from 'typeorm';
@@ -25,6 +25,6 @@ export class Specialty {
   @OneToMany(() => SpecialtyDetails, specialtydetails => specialtydetails.Specialty)
   specialtydetails: SpecialtyDetails[];
 
-  @OneToOne(() => Favorites, favorites => favorites.specialty)
-  favorites: Favorites;
+  @OneToOne(() => FavoritesEntity, favorites => favorites.specialty)
+  favorites: FavoritesEntity;
 }
