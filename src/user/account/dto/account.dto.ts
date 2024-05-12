@@ -7,6 +7,9 @@ export class AccountDto extends BasedDto {
   username: string;
 
   @ApiProperty()
+  account_id: string;
+
+  @ApiProperty()
   isVerified: boolean;
 
   constructor(entity: AccountEntity) {

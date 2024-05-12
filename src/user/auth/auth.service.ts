@@ -41,7 +41,7 @@ export class AuthService {
         where: { username: loginRequestDto.username },
         relations: ['profile'],
       });
-
+  
       if (!existedAccount) {
         throw new NotFoundException('Account not found');
       }
@@ -49,7 +49,7 @@ export class AuthService {
       if (!existedAccount.profile) {
         throw new NotFoundException('Profile not found');
       }
-
+  
       const isMatch = await bcrypt.compare(
         loginRequestDto.password,
         existedAccount.password,
@@ -57,7 +57,7 @@ export class AuthService {
       if (!isMatch) {
         throw new BadRequestException('Wrong password');
       }
-
+  
       const refreshToken = await this._generateRefreshToken(
         loginRequestDto.username,
       );
@@ -69,13 +69,20 @@ export class AuthService {
         existedAccount.profile.profile_id,
         existedAccount.account_id,
       );
+  
+      // Gán giá trị cho account_id
+      const account_id = existedAccount.account_id;
+  
       const account = await this._accountRepository.findOne({
         where: { username: loginRequestDto.username },
         relations: ['profile'],
       });
+  
+      // Trả về đối tượng LoginResponseDto với thông tin cần thiết
       return {
         accessToken,
         refreshToken,
+        account_id, // Thêm account_id vào phần trả về
         account: new AccountDto(account),
         profile: new ProfileDto(account.profile),
       };
@@ -83,6 +90,7 @@ export class AuthService {
       throw error;
     }
   }
+  
 
   //Đăng ký
   public async register(registerRequestDto: RegisterRequestDto) {
