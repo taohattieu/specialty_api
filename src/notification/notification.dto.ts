@@ -4,7 +4,7 @@ import { BasedDto } from "src/common/based.dto"
 import { AccountEntity } from "src/user/account/entities/account.entities"
 
 
-export class NotificationDto extends BasedDto {
+export class NotificationDto {
 
     notification_id: string
 
@@ -16,8 +16,7 @@ export class NotificationDto extends BasedDto {
     @ApiProperty({ example: 'Giỗ tổ Hùng Vương'})
     message: string
 
-    send_at: Date
-
     @ApiProperty({ example: ''})
     account_id: string;
+
 }

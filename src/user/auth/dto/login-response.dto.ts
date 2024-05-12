@@ -9,6 +9,9 @@ export class LoginResponseDto {
   @ApiResponseProperty()
   refreshToken: string;
 
+  @ApiProperty()
+  account_id: string;
+
   @ApiProperty({ type: AccountDto })
   account: AccountDto;
 

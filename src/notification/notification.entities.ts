@@ -15,10 +15,7 @@ export class NotificationEntity extends BasedEntity{
     @Column()
     message: string
 
-    @Column()
-    send_at: Date
-
-    @ManyToOne(() => AccountEntity, account => account.notification)
-    @JoinColumn({ name: 'account_id' })
+    @ManyToOne(() => AccountEntity, { eager: true })
+  @JoinColumn({ name: 'account_id' })
   account: AccountEntity;
 }
