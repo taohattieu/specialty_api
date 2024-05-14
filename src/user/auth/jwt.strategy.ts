@@ -16,6 +16,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: any) {
     // Called at method use @UseGuards(JwtAuthGuard)
     // Payload là những thông tin được truyền vào trong token
-    return { username: payload.username};
+    return { username: payload.username, profile_id: payload.profile_id};
   }
 }

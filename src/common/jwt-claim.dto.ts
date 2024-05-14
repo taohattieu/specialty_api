@@ -9,4 +9,10 @@ export class JwtClaimDto {
 
   @ApiProperty()
   account_id: string;
+
+  @ApiProperty()
+  exp: number;
+
+  @ApiProperty()
+  iat: number;
 }

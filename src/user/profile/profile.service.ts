@@ -9,62 +9,51 @@ import { JwtClaimDto } from 'src/common/jwt-claim.dto';
 @Injectable()
 export class ProfileService {
   constructor(
-    @InjectRepository(ProfileRepository)
-    private readonly _profileRepository: ProfileRepository,
+    @InjectRepository(ProfileEntity)
+    private readonly profileRepository: ProfileRepository,
   ) {}
 
-// // Hiển thị profile theo id
-// async findProfileById(profile_id: string): Promise<ProfileDto> {
-//   const profile = await this._profileRepository.findOne({
-//     where: { profile_id },
-//   });
-//   // console.log("Profile:", profile);
-//   if (!profile) {
-//     throw new NotFoundException(`Profile ${profile_id} not found`);
-//   }
-//   return new ProfileDto(profile);
-// }
-
   async update(authUser: JwtClaimDto, updateProfileDto: UpdateProfileDto) {
-    try {
-      const user = await this._profileRepository.findOne({
-        where: { profile_id: authUser.profile_id },
-        relations: ['account'],
-      });
-      if (!user) {
-        throw new BadRequestException('User not found');
-      }
-      // Cập nhật thông tin của người dùng
-      await this._profileRepository.update(
-        { profile_id: authUser.profile_id },
-        updateProfileDto,
-      );
-      // Lấy thông tin người dùng sau khi cập nhật
-      const updatedUser = await this._profileRepository.findOne({
-        where: { profile_id: authUser.profile_id },
-        relations: ['account'],
-      });
-      return new ProfileDto(updatedUser);
-    } catch (error) {
-      throw error;
+    console.log('authUser:', authUser); // Ghi nhật ký để kiểm tra authUser
+    if (!authUser || !authUser.profile_id) {
+      throw new BadRequestException('Thiếu ID hồ sơ trong token xác thực.');
     }
+
+    const user = await this.profileRepository.findOne({
+      where: { profile_id: authUser.profile_id },
+      relations: ['account'],
+    });
+
+    if (!user) {
+      throw new BadRequestException('Không tìm thấy người dùng');
+    }
+
+    // Đảm bảo updateProfileDto không trống
+    if (!Object.keys(updateProfileDto).length) {
+      throw new BadRequestException('Không có trường hợp lệ nào để cập nhật.');
+    }
+
+    await this.profileRepository.update(authUser.profile_id, updateProfileDto);
+
+    // Lấy lại thông tin người dùng đã cập nhật để trả về thông tin chi tiết mới nhất
+    const updatedUser = await this.profileRepository.findOne({
+      where: { profile_id: authUser.profile_id },
+      relations: ['account'],
+    });
+
+    return new ProfileDto(updatedUser);
   }
 
   async getCurrentUser(authUser: JwtClaimDto) {
-    try {
-      const user = await this._profileRepository.findOne({
-        where: { profile_id: authUser.profile_id },
-        relations: ['account'],
-      });
-      if (!user) {
-        throw new BadRequestException('User not found');
-      }
-      return new ProfileDto(user);
-    } catch (error) {
-      throw error;
+    const user = await this.profileRepository.findOne({
+      where: { account: { username: authUser.username } },
+      relations: ['account'],
+    });
+
+    if (!user) {
+      throw new BadRequestException('Không tìm thấy người dùng');
     }
+
+    return new ProfileDto(user);
   }
-
-
-
 }

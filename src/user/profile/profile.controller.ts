@@ -18,7 +18,7 @@ import { profile } from 'console';
 @Controller({ path: 'profile', version: apiVersion })
 @ApiTags('Profile')
 export class ProfileController {
-  constructor(private readonly _profileService: ProfileService) {}
+  constructor(private readonly profileService: ProfileService) {}
 
 
   // @Get(':id')
@@ -35,7 +35,7 @@ export class ProfileController {
   })
   @ApiOperation({ summary: 'Lấy thông tin user đăng nhập' })
   getCurrentUser(@AuthUser() authUser: JwtClaimDto) {
-    return this._profileService.getCurrentUser(authUser);
+    return this.profileService.getCurrentUser(authUser);
   }
 
   @Patch('me')
@@ -50,6 +50,6 @@ export class ProfileController {
     @AuthUser() authUser: JwtClaimDto,
     @Body() updateProfileDto: UpdateProfileDto,
   ) {
-    return this._profileService.update(authUser, updateProfileDto);
+    return this.profileService.update(authUser, updateProfileDto);
   }
 }

@@ -1,4 +1,5 @@
 import { Optional } from "@nestjs/common"
+import { ApiProperty } from "@nestjs/swagger"
 import { IsNotEmpty } from "class-validator"
 
 
@@ -6,17 +7,27 @@ export class SpecialtyDetailsUpdateDto {
 
     specialtydetails_id
 
+    @ApiProperty({ example: ''})
     @IsNotEmpty()
-    name: string
+    name: string;
 
-    ingredient: string
+    @ApiProperty({ example: ''})
+    ingredient: string;
 
+    @ApiProperty({ example: ''})
     @IsNotEmpty()
-    origin: string
+    origin: string;
 
+    @ApiProperty({ example: ''})
     @IsNotEmpty()
-    image: string
+    image: string;
 
+    @ApiProperty({ example: ''})
     @Optional()
-    description: string
+    description: string;
+
+    @ApiProperty({ example: ''})
+    @Optional()
+    specialty_id: string;
+
 }

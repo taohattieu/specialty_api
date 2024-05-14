@@ -82,7 +82,7 @@ export class AuthService {
       return {
         accessToken,
         refreshToken,
-        account_id, // Thêm account_id vào phần trả về
+        account_id,
         account: new AccountDto(account),
         profile: new ProfileDto(account.profile),
       };
@@ -121,7 +121,10 @@ export class AuthService {
       await this._profileRepository.save({
         displayName: `${registerRequestDto.firstName} ${registerRequestDto.lastName}`,
         avatar: `${registerRequestDto.avatar}`,
+        coverImage: `${registerRequestDto.coverImage}`,
         address: `${registerRequestDto.address}`,
+        email: `${registerRequestDto.email}`,
+        phone: `${registerRequestDto.phone}`,
         account: { account_id: accountCreatedWithoutRefreshToken.account_id },
       });
   
