@@ -1,3 +1,5 @@
+import { ProfileEntity } from "src/user/profile/entities/profile.entities";
+
 module.exports = {
     type: 'mysql',
     host: 'localhost',
@@ -5,6 +7,7 @@ module.exports = {
     username: 'admin',
     password: '12345678',
     database: 'specialty_database',
+    entities: [ProfileEntity],
     synchronize: true,
   };
   

@@ -20,6 +20,8 @@ import { SpecialtyDetailsModule } from './specialty-details/specialty-details.mo
 import { AccountModule } from './user/account/account.module';
 import { JwtModule } from '@nestjs/jwt';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ImageEntity } from './user/profile/entities/image.entities';
+import { ImagesModule } from './user/profile/image.module';
 
 @Module({
   imports: [
@@ -45,7 +47,8 @@ import { CacheModule } from '@nestjs/cache-manager';
         NotificationEntity,
         AccountEntity,
         ProfileEntity,
-        FavoritesEntity
+        FavoritesEntity,
+        ImageEntity
       ],
       synchronize: true,
       // logging: true
@@ -59,7 +62,8 @@ import { CacheModule } from '@nestjs/cache-manager';
     RegionsModule,
     FavoritesModule,
     AccountModule,
-    JwtModule
+    JwtModule,
+    ImagesModule
   ],
 })
 export class AppModule {}

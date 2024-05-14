@@ -25,4 +25,5 @@ export class SpecialtyDetails {
   @ManyToOne(() => Specialty, specialty => specialty.specialtydetails)
   @JoinColumn({ name: 'specialty_id' })
   Specialty: Specialty;
+    specialty_id: string;
 }

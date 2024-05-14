@@ -2,8 +2,10 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsDateString,
   IsEmail,
+  IsMobilePhone,
   IsNotEmpty,
   IsOptional,
+  IsPhoneNumber,
   IsString,
   Matches,
   MaxLength,
@@ -36,6 +38,10 @@ export class RegisterRequestDto {
   @IsString()
   avatar: string;
 
+  @ApiProperty({ example: '' })
+  @IsString()
+  coverImage: string;
+
   @ApiProperty({ example: 'Tao' })
   @IsString()
   @MaxLength(25)
@@ -45,4 +51,13 @@ export class RegisterRequestDto {
   @IsString()
   @MaxLength(25)
   lastName: string;
+
+  @ApiProperty({ example: 'example@gmail.com'})
+  @IsEmail()
+  @IsString()
+  email: string;
+
+  @ApiProperty({ example: '0866372912'})
+  @MaxLength(11)
+  phone: string;
 }

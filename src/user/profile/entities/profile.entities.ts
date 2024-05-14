@@ -15,7 +15,16 @@ export class ProfileEntity extends BasedEntity {
   avatar?: string;
 
   @Column()
-  address?: string
+  coverImage?: string;
+
+  @Column()
+  address?: string;
+
+  @Column()
+  email?: string;
+
+  @Column()
+  phone?: string;
 
   @OneToOne(() => AccountEntity, ({ profile }) => profile)
   @JoinColumn({ name: 'account_id'})
