@@ -8,7 +8,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false,
+      ignoreExpiration: true, //check hạn token true = auto qua, false = còn hạn mới qua
       secretOrKey: configService.get<string>('JWT_ACCESS_TOKEN_SECRET'),
     });
   }
@@ -16,6 +16,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: any) {
     // Called at method use @UseGuards(JwtAuthGuard)
     // Payload là những thông tin được truyền vào trong token
-    return { username: payload.username, profile_id: payload.profile_id};
+    return {
+      username: payload.username,
+      profile_id: payload.profile_id,
+      account_id: payload.account_id,
+      specialty_id: payload.specialty_id
+    };
   }
 }

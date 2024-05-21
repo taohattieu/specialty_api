@@ -1,22 +1,17 @@
-import { ApiProperty } from "@nestjs/swagger"
-import { IsNotEmpty, IsString } from "class-validator"
-import { BasedDto } from "src/common/based.dto"
-import { AccountEntity } from "src/user/account/entities/account.entities"
-
+import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsString, IsOptional, IsUUID } from "class-validator";
 
 export class NotificationDto {
-
-    notification_id: string
+    @IsNotEmpty()
+    @ApiProperty({ example: 'Sự kiện tại địa phương' })
+    type: string;
 
     @IsNotEmpty()
-    @ApiProperty({ example: 'Sự kiện tại địa phương'})
-    type: string
+    @ApiProperty({ example: 'Giỗ tổ Hùng Vương' })
+    message: string;
 
-    @IsNotEmpty()
-    @ApiProperty({ example: 'Giỗ tổ Hùng Vương'})
-    message: string
-
-    @ApiProperty({ example: ''})
-    account_id: string;
-
+    @IsOptional()
+    @IsUUID()
+    @ApiProperty({ example: 'fc83743d-2bc9-49ef-9efa-2fa66c6171f5' })
+    account_id?: string; 
 }

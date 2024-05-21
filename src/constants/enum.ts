@@ -5,7 +5,6 @@ export enum UserType {
 
 export enum MetadataKey {
   IS_PUBLIC = 'isPublic',
-  ROLES = 'roles',
   RESPONSE_MESSAGE = 'responseMessage',
 }
 

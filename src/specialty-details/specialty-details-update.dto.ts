@@ -8,18 +8,19 @@ export class SpecialtyDetailsUpdateDto {
     specialtydetails_id
 
     @ApiProperty({ example: ''})
-    @IsNotEmpty()
+    @Optional()
     name: string;
 
     @ApiProperty({ example: ''})
+    @Optional()
     ingredient: string;
 
     @ApiProperty({ example: ''})
-    @IsNotEmpty()
+    @Optional()
     origin: string;
 
     @ApiProperty({ example: ''})
-    @IsNotEmpty()
+    @Optional()
     image: string;
 
     @ApiProperty({ example: ''})
