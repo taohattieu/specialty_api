@@ -4,15 +4,15 @@ import { Repository } from 'typeorm';
 import { SpecialtyDetails } from './specialty-details.entities';
 import { SpecialtyDetailsAddDto } from './specialty-details-add.dto';
 import { SpecialtyDetailsUpdateDto } from './specialty-details-update.dto';
-import { Specialty } from 'src/specialty/specialty.entities';
+import { SpecialtyEntity } from 'src/specialty/specialty.entities';
 
 @Injectable()
 export class SpecialtyDetailsService {
   constructor(
     @InjectRepository(SpecialtyDetails)
     private readonly specialtyDetailsRepository: Repository<SpecialtyDetails>,
-    @InjectRepository(Specialty)
-    private readonly specialtyRepository: Repository<Specialty>, // Inject repository for Specialty
+    @InjectRepository(SpecialtyEntity)
+    private readonly specialtyRepository: Repository<SpecialtyEntity>, // Inject repository for Specialty
   ) {}
 
   // Hiển thị tất cả chi tiết đặc sản

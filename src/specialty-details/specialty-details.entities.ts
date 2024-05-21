@@ -1,5 +1,5 @@
 import { Province } from 'src/province/province.entities';
-import { Specialty } from 'src/specialty/specialty.entities';
+import { SpecialtyEntity } from 'src/specialty/specialty.entities';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity('specialty details')
@@ -10,7 +10,7 @@ export class SpecialtyDetails {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ type: 'longtext'})
   ingredient: string;
 
   @Column()
@@ -19,11 +19,11 @@ export class SpecialtyDetails {
   @Column()
   image: string;
 
-  @Column()
+  @Column({ type: 'longtext'})
   description: string;
 
-  @ManyToOne(() => Specialty, specialty => specialty.specialtydetails)
+  @ManyToOne(() => SpecialtyEntity, specialty => specialty.specialtydetails)
   @JoinColumn({ name: 'specialty_id' })
-  Specialty: Specialty;
+  Specialty: SpecialtyEntity;
     specialty_id: string;
 }

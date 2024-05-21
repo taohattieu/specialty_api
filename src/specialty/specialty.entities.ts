@@ -1,11 +1,19 @@
-
 import { FavoritesEntity } from 'src/favorites/favorites.entities';
 import { Province } from 'src/province/province.entities';
 import { SpecialtyDetails } from 'src/specialty-details/specialty-details.entities';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  ManyToMany,
+} from 'typeorm';
 
 @Entity('specialty')
-export class Specialty {
+export class SpecialtyEntity {
   @PrimaryGeneratedColumn('uuid')
   specialty_id: string;
 
@@ -16,15 +24,18 @@ export class Specialty {
   image: string;
 
   @Column()
-  province_id: string
+  province_id: string;
 
-  @ManyToOne(() => Province, province => province.specialty)
+  @ManyToOne(() => Province, (province) => province.specialty)
   @JoinColumn({ name: 'province_id' })
   province: Province;
 
-  @OneToMany(() => SpecialtyDetails, specialtydetails => specialtydetails.Specialty)
+  @OneToMany(
+    () => SpecialtyDetails,
+    (specialtydetails) => specialtydetails.Specialty,
+  )
   specialtydetails: SpecialtyDetails[];
 
-  @OneToOne(() => FavoritesEntity, favorites => favorites.specialty)
-  favorites: FavoritesEntity;
+  @ManyToMany(() => FavoritesEntity, (favorite) => favorite.specialty)
+  favorites: FavoritesEntity[];
 }

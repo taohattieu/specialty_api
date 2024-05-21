@@ -7,7 +7,6 @@ import { ProfileModule } from './user/profile/profile.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { Province } from './province/province.entities';
-import { Specialty } from './specialty/specialty.entities';
 import { NotificationEntity } from './notification/notification.entities';
 import { AccountEntity } from './user/account/entities/account.entities';
 import { ProfileEntity } from './user/profile/entities/profile.entities';
@@ -22,6 +21,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ImageEntity } from './user/profile/entities/image.entities';
 import { ImagesModule } from './user/profile/image.module';
+import { SpecialtyEntity } from './specialty/specialty.entities';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { ImagesModule } from './user/profile/image.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -42,28 +44,28 @@ import { ImagesModule } from './user/profile/image.module';
       entities: [
         Province,
         Regions,
-        Specialty,
+        AccountEntity,
+        SpecialtyEntity,
         SpecialtyDetails,
         NotificationEntity,
-        AccountEntity,
         ProfileEntity,
         FavoritesEntity,
-        ImageEntity
+        // ImageEntity
       ],
       synchronize: true,
       // logging: true
     }),
     ProvinceModule,
-    SpecialtyModule,
     SpecialtyDetailsModule,
     NotificationModule,
     AuthModule,
     ProfileModule,
     RegionsModule,
-    FavoritesModule,
     AccountModule,
+    SpecialtyModule,
+    FavoritesModule,
     JwtModule,
-    ImagesModule
+    // ImagesModule
   ],
 })
 export class AppModule {}

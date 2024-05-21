@@ -26,6 +26,6 @@ export class AccountEntity extends BasedEntity {
   @OneToMany(() => NotificationEntity, notification => notification.account)
   notification: NotificationEntity[];
 
-  @OneToMany(() => FavoritesEntity, favorites => favorites.account)
-  favorites: FavoritesEntity[];
+  @ManyToMany(() => FavoritesEntity, (favorite) => favorite.account)
+favorites: FavoritesEntity[];
 }

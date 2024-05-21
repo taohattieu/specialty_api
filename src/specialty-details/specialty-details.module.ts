@@ -3,10 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SpecialtyDetails } from './specialty-details.entities';
 import { SpecialtyDetailsService } from './specialty-details.service';
 import { SpecialtyDetailsController } from './specialty-details.controller';
-import { Specialty } from 'src/specialty/specialty.entities'; 
+import { SpecialtyEntity } from 'src/specialty/specialty.entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SpecialtyDetails, Specialty])], 
+  imports: [TypeOrmModule.forFeature([SpecialtyDetails, SpecialtyEntity])], 
   providers: [SpecialtyDetailsService],
   controllers: [SpecialtyDetailsController],
 })
