@@ -6,6 +6,6 @@ export function Auth() {
   return applyDecorators(
     UseGuards(JwtAuthGuard),
     ApiBearerAuth(),
-    ApiUnauthorizedResponse({ description: 'Unauthorized' }),
+    ApiUnauthorizedResponse({ description: 'Unauthorized.' }),
   );
 }

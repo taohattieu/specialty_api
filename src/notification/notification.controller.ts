@@ -11,7 +11,7 @@ export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard) // Sử dụng guard nếu cần
+  // @UseGuards(JwtAuthGuard) // Sử dụng guard nếu cần
   async create(@Body() createNotificationDto: NotificationDto): Promise<NotificationEntity> {
       try {
           return await this.notificationService.create(createNotificationDto);

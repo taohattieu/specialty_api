@@ -16,7 +16,7 @@ export class RegisterRequestDto {
   @ApiProperty({ example: 'nguyenvantao' })
   @IsString()
   @IsNotEmpty()
-  @MinLength(20, { message: 'Username phải có ít nhất 10 ký tự!'})
+  @MinLength(6, { message: 'Username phải có ít nhất 6 ký tự!'})
   @MaxLength(25, { message: 'Username chỉ được tối đa 25 ký tự!'})
   @Matches(/^[a-zA-Z0-9]+$/, {
     message:
@@ -53,7 +53,6 @@ export class RegisterRequestDto {
   lastName: string;
 
   @ApiProperty({ example: 'example@gmail.com'})
-  @IsEmail()
   @IsString()
   email: string;
 

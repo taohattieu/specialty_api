@@ -6,7 +6,7 @@ import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller('account')
 @ApiTags("Account")
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class AccountController {
     constructor (private readonly  accountService: AccountService) {} 
 

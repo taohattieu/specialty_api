@@ -15,7 +15,7 @@ import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller({ path: 'auth', version: apiVersion })
 @ApiTags('Auth')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class AuthController {
   constructor(
     private readonly _authService: AuthService,
