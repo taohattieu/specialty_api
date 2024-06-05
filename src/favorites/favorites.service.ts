@@ -18,12 +18,11 @@ export class FavoritesService {
         private specialtyRepository: SpecialtyRepository,
     ) {}
 
-    async create(createFavoritesDto: CreateFavoritesDto, req: any): Promise<FavoritesEntity> {
+    async create(createFavoritesDto: CreateFavoritesDto, userId: string): Promise<FavoritesEntity> {
       try {
-          const userId = req.user.account_id;
           const account = await this.accountRepository.findOne({
               where: { account_id: userId },
-              relations: ['favorites'], // Tải các mục yêu thích của tài khoản
+              relations: ['favorites'],
           });
   
           const specialty = await this.specialtyRepository.findOne({
@@ -34,12 +33,17 @@ export class FavoritesService {
               throw new NotFoundException('Không tìm thấy tài khoản hoặc chuyên ngành');
           }
   
-          // Tạo một đối tượng FavoritesEntity mới để trả về
+          const existingFavorite = account.favorites.find(favorite => favorite.specialty.specialty_id === createFavoritesDto.specialty_id);
+          if (existingFavorite) {
+              // Return existing favorite if it already exists
+              return existingFavorite;
+          }
+  
           const newFavorite = new FavoritesEntity();
           newFavorite.account = account;
           newFavorite.specialty = specialty;
   
-          return newFavorite; // Trả về mục yêu thích vừa được tạo hoặc đã tồn tại
+          return await this.favoritesRepository.save(newFavorite);
       } catch (error) {
           throw new InternalServerErrorException('Không thể tạo mục yêu thích', error.message);
       }
@@ -49,14 +53,14 @@ export class FavoritesService {
     try {
         const account = await this.accountRepository.findOne({
             where: { account_id: accountId },
-            relations: ['favorites', 'favorites.specialty'],  // Tải chi tiết đặc sản
+            relations: ['favorites', 'favorites.specialty'],
         });
 
         if (!account) {
             throw new NotFoundException('Không tìm thấy tài khoản');
         }
 
-        return account.favorites.map(favorite => favorite.specialty);  // Trích xuất các đối tượng đặc sản
+        return account.favorites.map(favorite => favorite.specialty);
     } catch (error) {
         throw new InternalServerErrorException('Không thể truy xuất các mục yêu thích');
     }

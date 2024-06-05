@@ -13,7 +13,6 @@ export class NotificationEntity extends BasedEntity {
     @Column()
     message: string;
 
-    @ManyToOne(() => AccountEntity, { eager: true })
-    @JoinColumn({ name: 'account_id' })
-    account?: AccountEntity; // Cho phép null
+    @ManyToOne(() => AccountEntity, account => account.notification)
+  account: AccountEntity;
 }
